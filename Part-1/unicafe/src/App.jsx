@@ -4,9 +4,15 @@ const Button = ({action, text}) => <button type='button' onClick={action} >{text
 
 const StatisticLine = ({text, value}) => {
   return (
-    <>
-      {text} {value} <br />
-    </>
+    <table>
+      <tbody>
+        <tr>
+          <td>{text}</td>
+          <td>{value}</td>
+        </tr>
+      </tbody>
+      
+    </table>
   )
 }
 
@@ -21,14 +27,13 @@ const Statistics = (props) => {
   return (
     <>
       <h1>Statistics</h1>
-      <p>
-        <StatisticLine text='good' value={props.good} />
-        <StatisticLine text='neutral' value={props.neutral} />
-        <StatisticLine text='bad' value={props.bad} />
-        <StatisticLine text='all' value={props.all} />
-        <StatisticLine text='average' value={props.average} />
-        <StatisticLine text='positive' value={props.positive} />
-      </p>
+
+      <StatisticLine text='good' value={props.good} />
+      <StatisticLine text='neutral' value={props.neutral} />
+      <StatisticLine text='bad' value={props.bad} />
+      <StatisticLine text='all' value={props.all} />
+      <StatisticLine text='average' value={props.average} />
+      <StatisticLine text='positive' value={props.positive} />
 
     </>
   )
