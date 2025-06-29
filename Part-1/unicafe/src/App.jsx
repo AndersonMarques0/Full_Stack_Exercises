@@ -1,4 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+
+const Statistics = (props) => {
+
+  return (
+    <>
+      <h1>Statistics</h1>
+      <p>
+        good {props.good} <br />
+        neutral {props.neutral} <br />
+        bad {props.bad} <br />
+        all {props.all} <br />
+        average {props.average} <br />
+        positive {props.positive}%
+      </p>
+
+    </>
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -12,27 +30,28 @@ const App = () => {
   const updateValue = (value, trigger ) => trigger(value)
 
   const countUp = (button) => () => {
+    let updatedGood = good
+    let updatedBad = bad
+    let updatedAll = all
 
     if (button === 'good') {
+      updatedGood = good + 1
       updateValue( good + 1, setGood )
-      updateValue( all + 1, setAll)
     } else if (button === 'neutral') {
       updateValue( neutral + 1, setNeutral)
-      updateValue( all + 1, setAll)
+      
     } else if (button === 'bad') {
+      updatedBad = bad + 1
       updateValue( bad + 1, setBad)
-      updateValue( all + 1, setAll)
     }
-  }
+    updatedAll = all + 1
+    setAll(all + 1)
+    if (updatedAll !== 0) {
+      setAve((updatedGood - updatedBad) / updatedAll)
+      setPos((updatedGood / updatedAll)*100)
+    }
 
-  useEffect(
-    () => {
-      if (all !== 0) {
-        updateValue( (good / all) * 100, setPos)
-        updateValue( (good - bad) / all, setAve)
-      }
-    }, [good, bad, all]
-  )
+  }
   
   return (
     <div>
@@ -40,18 +59,15 @@ const App = () => {
       <button type="button" onClick={countUp('good')} >good</button>
       <button type="button" onClick={countUp('neutral')} >neutral</button>
       <button type="button" onClick={countUp('bad')} >bad</button>
-
-      <h1>statistics</h1>
-
-      <p>
-        good {good} <br />
-        neutral {neutral} <br />
-        bad {bad} <br />
-        all {all} <br />
-        average {average} <br />
-        positive {positive}%
-      </p>
       
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        all={all}
+        average={average}
+        positive={positive}
+      />
       
     </div>
   )
