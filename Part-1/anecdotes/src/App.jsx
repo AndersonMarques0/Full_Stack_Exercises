@@ -27,8 +27,7 @@ const App = () => {
     ]
   )
 
-  
-   
+  const [ mostVote, setMostVote] = useState(0)   
   const [selected, setSelected] = useState(0)
 
   const changeQuote = () => setSelected(Math.floor(Math.random() * 8))
@@ -37,14 +36,41 @@ const App = () => {
     let newVotes = [...votes]
     newVotes[selected]++
     setVotes(newVotes)
+    showAnecdoteWithMostVotes(newVotes)
+  }
+
+  const showAnecdoteWithMostVotes = (list = votes) => {
+    let mostVotes
+    let mostIndex
+    for (let index = 0; index < list.length; index++) {
+      
+      if(index === 0) {
+        mostVotes = list[index]
+        mostIndex = index
+      } else {
+        if(list[index] > mostVotes) {
+        mostVotes = list[index]
+        mostIndex = index
+        }
+      }
+      
+    }
+
+    setMostVote(mostIndex)
+
   }
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button text='vote' action={getVotes} />
       <Button text='next anecdote' action={changeQuote} />
+
+      <h1>Anecdote with most votes</h1>
+
+      <p>{anecdotes[mostVote]}</p>
     </div>
   )
 }
