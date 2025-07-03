@@ -1,9 +1,11 @@
 
 const Header = (props) => {
-
+    const content = props.course
+    console.log('Hello from header: ', props.course)
+    
     return (
         <>
-            <h1>{props.course.name}</h1>
+            <h1>{content}</h1>
         </>
     )
 }
