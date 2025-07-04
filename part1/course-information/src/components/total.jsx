@@ -1,9 +1,12 @@
 
 const Total = (props) => {
+    console.log('Hello from Total: ', props.exercises)
+    const exercises = props.exercises.map((exerc) => exerc.exercises)
+    const total = exercises.reduce((sum,value) => sum + value, 0)
 
     return (
         <>
-            <p>Number of exercises {props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises}</p>
+            <p>Total of {total} exercises</p>
         </>
     )
 }
