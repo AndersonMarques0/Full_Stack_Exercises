@@ -2,12 +2,14 @@ import Content from "./content"
 import Header from "./header"
 
 const Course = (props) => {
-    console.log('Hello from course: ', props.course.parts)
+    console.log('Hello from course: ', props.course)
 
     return (
         <>
-            <Header course={props.course.name} />
-            <Content name={props.course.parts} exercises={props.course.parts} />
+            <Header course={props.course[0]} />
+            <Content course={props.course[0]} />
+            <Header course={props.course[1]} />
+            <Content course={props.course[1]} />
         </>
     )
 }

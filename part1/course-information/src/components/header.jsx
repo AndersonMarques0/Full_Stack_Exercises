@@ -1,6 +1,6 @@
 
 const Header = (props) => {
-    const content = props.course
+    const content = props.course.name
     console.log('Hello from header: ', props.course)
     
     return (
