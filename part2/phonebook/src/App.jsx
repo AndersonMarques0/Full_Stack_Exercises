@@ -14,6 +14,15 @@ const App = () => {
   const addPerson = event => {
     event.preventDefault()
     console.log('form submite: ', newName)
+    for (const person of persons) {
+      console.log('person.name: ', person.name)
+      console.log('newName.name: ', newName)
+      if(person.name === newName) {
+        alert(`${person.name} is already added to phonebook`)
+        return
+      }
+    }
+
     const newPerson = {
       name: newName
     }
