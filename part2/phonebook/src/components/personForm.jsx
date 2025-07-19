@@ -1,25 +1,29 @@
+import axios from 'axios'
 
 const PersonForm = (props) => {
-    console.log(props.valueName)
 
     const addPerson = event => {
-    event.preventDefault()
-    console.log('form submite: ', props.valueName)
-    for (const person of props.persons) {
-      console.log('person.name: ', person.name)
-      console.log('newName.name: ', props.valueName)
-      if(person.name === props.valueName) {
-        alert(`${person.name} is already added to phonebook`)
-        return
+      event.preventDefault()
+      for (const person of props.persons) {
+        if(person.name === props.valueName) {
+          alert(`${person.name} is already added to phonebook`)
+          return
+        }
       }
-    }
 
-    const newPerson = {
-      name: props.valueName,
-      phone: props.valueNumber,
-      id: props.persons[props.persons.length - 1].id + 1
-    }
-    props.setPersons(props.persons.concat(newPerson))
+      const newPerson = {
+        name: props.valueName,
+        number: props.valueNumber,
+        id: String(props.persons.length + 1)
+      }
+
+      axios
+        .post('http://localhost:3001/persons', newPerson)
+        .then(response => {
+          props.setPersons(props.persons.concat(response.data))
+        })
+
+      
   }
 
     return (
