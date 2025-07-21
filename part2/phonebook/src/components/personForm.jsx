@@ -1,4 +1,4 @@
-import axios from 'axios'
+import servicePersons from '../services/servicePersons'
 
 const PersonForm = (props) => {
 
@@ -17,11 +17,11 @@ const PersonForm = (props) => {
         id: String(props.persons.length + 1)
       }
 
-      axios
-        .post('http://localhost:3001/persons', newPerson)
-        .then(response => {
-          props.setPersons(props.persons.concat(response.data))
-        })
+      servicePersons
+      .create(newPerson)
+      .then(response => {
+        props.setPersons(props.persons.concat(response.data))
+      })
 
       
   }
