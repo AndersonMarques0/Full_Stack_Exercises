@@ -7,7 +7,12 @@ const create = newObject => {
     return axios.post(backUrl, newObject)
 }
 
+const deleteUser = id => {
+    return axios.delete(backUrl + `/${id}`)
+}
+
 export default {
     getAll,
-    create
+    create,
+    deleteUser
 }

@@ -1,3 +1,6 @@
+import Button from "./button"
+import servicePersons from "../services/servicePersons"
+
 const Persons = (props) => {
 
     const filteredPersons = props.persons.filter(person => {
@@ -26,9 +29,25 @@ const Persons = (props) => {
       }
     })
 
+    const deletePerson = (id, name ) => {
+      console.log('Hello from deletePerson')
+      const decision = confirm(`Delete ${name} ?`)
+
+      if(decision) {
+        
+        servicePersons.deleteUser(id)
+        props.setPersons(props.persons.toSpliced(props.persons.indexOf(name), 1))
+
+      }else {
+        return
+      }
+
+      
+    }
+
     return (
         <div>
-            {filteredPersons.map(person => <p key={person.id} >{person.name} {person.number}</p>)}
+            {filteredPersons.map(person => <p key={person.id} >{person.name} {person.number} <Button text='delete' action={() => deletePerson(person.id, person.name) } /> </p>)}
         </div>
     )
 }
