@@ -7,6 +7,12 @@ const create = newObject => {
     return axios.post(backUrl, newObject)
 }
 
+const update = (id, changedValue) => {
+    const updatedUrl = `${backUrl}/${id}`
+
+    return axios.put(updatedUrl, changedValue)
+}
+
 const deleteUser = id => {
     return axios.delete(backUrl + `/${id}`)
 }
@@ -14,5 +20,6 @@ const deleteUser = id => {
 export default {
     getAll,
     create,
-    deleteUser
+    deleteUser,
+    update
 }

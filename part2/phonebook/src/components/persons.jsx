@@ -30,7 +30,6 @@ const Persons = (props) => {
     })
 
     const deletePerson = (id, name ) => {
-      console.log('Hello from deletePerson')
       const decision = confirm(`Delete ${name} ?`)
 
       if(decision) {
