@@ -31,6 +31,10 @@ const PersonForm = (props) => {
         .then(response => {
           props.setPersons(props.persons.map(person => person.id === id ? response.data : person))
         })
+        props.handleMessage(`${changedPerson.name} changed your number!`)
+        setTimeout(() => {
+          props.handleMessage(null)
+        }, 5000)
         return
       }
 
@@ -46,7 +50,11 @@ const PersonForm = (props) => {
         props.setPersons(props.persons.concat(response.data))
       })
 
-      
+      props.handleMessage(`${newPerson.name} added!`)
+      setTimeout(() => {
+        props.handleMessage(null)
+      }, 5000)
+
   }
 
     return (

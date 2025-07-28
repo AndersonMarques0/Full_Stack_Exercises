@@ -3,12 +3,15 @@ import Filter from './components/filter'
 import PersonForm from './components/personForm'
 import Persons from './components/persons'
 import servicePersons from './services/servicePersons'
+import Notification from './components/notification'
+import './App.css'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [errorMessage, SetErrorMessage] = useState('')
 
   useEffect(() => {
     servicePersons
@@ -34,6 +37,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <Filter value={filter} handle={handleFilter} />
 
       <h2>Add a new</h2>
@@ -41,6 +45,7 @@ const App = () => {
         persons={persons} setPersons={setPersons}
         valueName={newName} handleName={handleNewName}
         valueNumber={newNumber} handleNumber={handleNewNumber}
+        message={errorMessage} handleMessage={SetErrorMessage}
       />
 
       <h2>Numbers</h2>
