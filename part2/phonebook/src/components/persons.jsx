@@ -2,6 +2,8 @@ import Button from "./button"
 import servicePersons from "../services/servicePersons"
 
 const Persons = (props) => {
+  console.log('Hello from Persons', props);
+  
 
     const filteredPersons = props.persons.filter(person => {
       const name = props.filter.toLocaleLowerCase()
@@ -35,7 +37,22 @@ const Persons = (props) => {
       if(decision) {
         
         servicePersons.deleteUser(id)
-        props.setPersons(props.persons.toSpliced(props.persons.indexOf(name), 1))
+        .then(() => {
+          props.setPersons(props.persons.toSpliced(props.persons.indexOf(name), 1))
+          props.messageType('negative')
+          props.handleMessage(`${name} deleted`)
+        })
+        .catch((error) => {
+          props.messageType('negative')
+          props.handleMessage(`Information of ${name} has already been removed from server`)
+          props.setPersons(props.persons.toSpliced(props.persons.indexOf(name), 1))
+          console.error(error)
+        })
+        setTimeout(() => {
+            props.handleMessage(null)
+          }, 5000)
+          
+        
 
       }else {
         return

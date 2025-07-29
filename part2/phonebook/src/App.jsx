@@ -11,7 +11,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [errorMessage, SetErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [cssError, setCssError] = useState('')
 
   useEffect(() => {
     servicePersons
@@ -34,10 +35,12 @@ const App = () => {
     setFilter(event.target.value)
   }
 
+  console.log('Hello from App, cssError: ', cssError)
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} css={cssError} />
       <Filter value={filter} handle={handleFilter} />
 
       <h2>Add a new</h2>
@@ -45,11 +48,17 @@ const App = () => {
         persons={persons} setPersons={setPersons}
         valueName={newName} handleName={handleNewName}
         valueNumber={newNumber} handleNumber={handleNewNumber}
-        message={errorMessage} handleMessage={SetErrorMessage}
+        handleMessage={setErrorMessage}
+        messageType={setCssError}
       />
 
       <h2>Numbers</h2>
-      <Persons persons={persons} setPersons={setPersons} filter={filter} />
+      <Persons 
+        persons={persons} setPersons={setPersons} 
+        filter={filter} 
+        handleMessage={setErrorMessage}
+        messageType={setCssError}
+      />
     </div>
   )
 }

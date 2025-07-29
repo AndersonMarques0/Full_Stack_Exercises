@@ -1,7 +1,16 @@
-.error {
+.positive {
     color: greenyellow;
     margin: 5px;
     padding: 1px;
     font-size: 20px;
+    border: 1px groove greenyellow;
+}
+
+.negative {
+    color: red;
+    margin: 5px;
+    padding: 1px;
+    font-size: 20px;
+    border: 1px groove red;
 }
 
