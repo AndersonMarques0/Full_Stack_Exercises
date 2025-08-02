@@ -41,6 +41,17 @@ Exercises
 [Unicafe](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part1/unicafe)
 <img width="1920" height="1080" alt="unicafe" src="https://github.com/user-attachments/assets/88059a5a-7bb8-4e5c-81ed-1650a110d4c6" />
 
+
 [Anecdotes](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part1/anecdotes)
 <img width="1920" height="1080" alt="anecdotes" src="https://github.com/user-attachments/assets/778f8eb9-322e-462a-ae8a-210202957687" />
+
+## Communicating with server
+- Rendering a collection, modules
+- Forms
+- Getting data from server
+- Altering data in server
+- Adding styles to React app
+
+[Phonebook](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part2/phonebook)
+<img width="1920" height="1080" alt="phonebook" src="https://github.com/user-attachments/assets/b5f85589-c0f3-4580-8ce5-dd16ec27c66e" />
 
