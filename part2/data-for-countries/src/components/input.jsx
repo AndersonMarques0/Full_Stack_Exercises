@@ -3,6 +3,7 @@ const Input = (props) => {
 
     const handleCountries = (event) => {
         props.setValue(event.target.value)
+        props.setPickedCountry(null)
     }
 
     return (
