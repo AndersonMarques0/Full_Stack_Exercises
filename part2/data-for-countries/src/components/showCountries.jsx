@@ -33,7 +33,7 @@ const ShowCountries = (props) => {
     const index = props.countries.findIndex(
       (element) => element.name.common === props.pickedCountry
     )
-    return <ShowCountryInformation index={index} array={props.countries} />
+    return <ShowCountryInformation index={index} array={props.countries} weather={props.weather} setWeather={props.setWeather} />
   }
 
   
@@ -47,7 +47,9 @@ const ShowCountries = (props) => {
       </p>
     ))
   } else if (filteredCountries.length === 1) {
-    return <ShowCountryInformation index={0} array={filteredCountries} />
+    return <ShowCountryInformation 
+              index={0} array={filteredCountries} weather={props.weather} setWeather={props.setWeather}
+            />
   }
 
   return null

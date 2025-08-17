@@ -7,6 +7,7 @@ function App() {
   const [ value, setValue] = useState('')
   const [ countries, setCountries ] = useState(null)
   const [ pickedCountry, setPickedCountry] = useState(null)
+  const [ weather, setWeather] = useState(null)
 
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         countries={countries} setCountries={setCountries}
         pickedCountry={pickedCountry} setPickedCountry={setPickedCountry}
         value={value}
+        weather={weather} setWeather={setWeather}
        />
     </>
   )
