@@ -55,3 +55,5 @@ Exercises
 [Phonebook](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part2/phonebook)
 <img width="1920" height="1080" alt="phonebook" src="https://github.com/user-attachments/assets/b5f85589-c0f3-4580-8ce5-dd16ec27c66e" />
 
+[Data For Countries](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part2/data-for-countries)
+<img width="1920" height="1080" alt="data-for-countries" src="https://github.com/user-attachments/assets/5d1f95d8-76eb-419a-957a-da612fdb808f" />
