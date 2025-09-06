@@ -1,0 +1,25 @@
+{
+  "name": "phonebook-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndersonMarques0/Full_Stack_Exercises.git"
+  },
+  "author": "Anderson da Silva Marques",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndersonMarques0/Full_Stack_Exercises/issues"
+  },
+  "homepage": "https://github.com/AndersonMarques0/Full_Stack_Exercises#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
