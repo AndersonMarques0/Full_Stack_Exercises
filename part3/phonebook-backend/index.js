@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { request, response } from 'express';
 const app = express();
 
 const persons = [
@@ -30,6 +30,14 @@ app.get('/', (request, response) => {
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+})
+
+app.get('/info', (request, response) => {
+  const date = new Date()
+  response.send(`
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p> ${date}</p>
+    `);
 })
 
 const PORT = 3000
