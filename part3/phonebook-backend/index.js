@@ -25,11 +25,24 @@ const persons = [
 ]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
+  response.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+  response.json(persons)
+})
+
+app.get('/api/persons/:id', (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  const person = persons.find(person => person.id === id)
+  if(person){
+    res.json(person)
+  }else{
+    res.status(404).json({
+      error: `Person with ID ${id} not found.`
+    })
+  }
 })
 
 app.get('/info', (request, response) => {
@@ -39,6 +52,7 @@ app.get('/info', (request, response) => {
     <p> ${date}</p>
     `);
 })
+
 
 const PORT = 3000
 app.listen(PORT, () => {
