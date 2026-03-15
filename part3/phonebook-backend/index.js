@@ -1,5 +1,6 @@
 import express, { request, response } from 'express';
 const app = express();
+app.use(express.json());
 
 let persons = [
     { 
@@ -23,6 +24,8 @@ let persons = [
       "number": "39-23-6423122"
     }
 ]
+
+const getId = () => String(Math.floor(Math.random() * 10000))
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
@@ -51,6 +54,25 @@ app.get('/info', (request, response) => {
     <p>Phonebook has info for ${persons.length} people</p>
     <p> ${date}</p>
     `);
+})
+
+app.post('/api/persons', (req, res) => {
+  const body = req.body
+
+  if(!body.content){
+    return res.status(400).json({
+      error: 'content missing.'
+    })
+  }
+
+  const person = {
+    id: getId(),
+    name: body.name,
+    number: body.number
+  }
+
+  persons = persons.concat(person)
+  res.json(person)
 })
 
 app.delete('/api/persons/:id', (req, res) => {
