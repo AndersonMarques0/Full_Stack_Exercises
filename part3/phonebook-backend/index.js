@@ -1,7 +1,7 @@
 import express, { request, response } from 'express';
 const app = express();
 
-const persons = [
+let persons = [
     { 
       "id": "1",
       "name": "Arto Hellas", 
@@ -53,6 +53,19 @@ app.get('/info', (request, response) => {
     `);
 })
 
+app.delete('/api/persons/:id', (req, res) => {
+  const id = req.params.id
+  const person = persons.find(person => person.id === id)
+  if(person){
+    persons = persons.filter(person => person.id !== id)
+    res.status(204).end()
+  }else{
+    res.status(404).json({
+      error: `Person with ID ${id} not exists.`
+    })
+  }
+  
+})
 
 const PORT = 3000
 app.listen(PORT, () => {
