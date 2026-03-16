@@ -1,4 +1,5 @@
 import express, { request, response } from 'express';
+import morgan from 'morgan';
 const app = express();
 app.use(express.json());
 
@@ -26,6 +27,9 @@ let persons = [
 ]
 
 const getId = () => String(Math.floor(Math.random() * 10000))
+
+app.use(morgan('tiny'));
+
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
