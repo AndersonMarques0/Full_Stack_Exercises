@@ -60,9 +60,25 @@ app.get('/info', (request, response) => {
     `);
 })
 
+morgan.token('person', (req, res) => {
+
+  if(req.method === 'POST'){
+    
+    return JSON.stringify({
+      "name": req.body.name,
+      "number": req.body.number
+    })
+  }else{
+    return '';
+  }
+
+})
+
+app.use(morgan(':method :url :status :res[content-length] :response-time ms :person'))
+
 app.post('/api/persons', (req, res) => {
   const body = req.body
-
+  
   if(!body.name){
     return res.status(400).json({
       error: 'name is missing!'
