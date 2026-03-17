@@ -1,7 +1,10 @@
 import express, { request, response } from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
+
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 let persons = [
     { 
@@ -122,7 +125,7 @@ app.delete('/api/persons/:id', (req, res) => {
   
 })
 
-const PORT = 3000
+const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
