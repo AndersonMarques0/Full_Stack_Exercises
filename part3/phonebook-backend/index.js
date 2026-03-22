@@ -2,8 +2,20 @@ import express, { request, response } from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import Person from './model/person.js';
+import person from './model/person.js';
 
 const app = express();
+
+const errorHandler = (error, req, res, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return res.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
 app.use(express.static('dist'))
 app.use(express.json());
 dotenv.config();
@@ -25,7 +37,7 @@ app.get('/api/persons', (request, response) => {
 app.get('/api/persons/:id', (req, res) => {
   Person.findById(req.params.id)
   .then((person) => {
-    if(note) {
+    if(person) {
       res.json(person)
     }else {
       res.status(404).end()
@@ -85,9 +97,14 @@ app.delete('/api/persons/:id', (req, res, next) => {
       res.status(204).end()
     })
     .catch(error => next(error))
-
-
 })
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
