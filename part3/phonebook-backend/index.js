@@ -49,13 +49,18 @@ app.get('/api/persons/:id', (req, res) => {
   })
 })
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   const date = new Date()
-  response.send(`
-    <p>Phonebook has info for ${persons.length} people</p>
-    <p> ${date}</p>
-    `);
-})
+
+  Person.countDocuments({})
+    .then(count => {
+      response.send(`
+        <p>Phonebook has info for ${count} people</p>
+        <p>${date}</p>
+      `);
+    })
+    .catch(error => next(error));
+});
 
 morgan.token('person', (req, res) => {
 
@@ -73,26 +78,52 @@ morgan.token('person', (req, res) => {
 
 app.use(morgan(':method :url :status :res[content-length] :response-time ms :person'))
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
   const body = req.body
-  
-  if(!body.name){
-    return res.status(400).json({
-      error: 'name is missing!'
-    })
-  }else if(Person.findOne({ name: body.name})){
-    return res.status(400).json({
-      error: 'this name already exists!'
-    })
+
+  if (!body.name) {
+    return res.status(400).json({ error: 'name is missing!' })
   }
 
-  const person = new Person({
-    id: getId(),
-    name: body.name,
-    number: body.number
-  }) 
+  Person.findOne({ name: body.name })
+    .then(existingPerson => {
+      if (existingPerson) {
+        return res.status(400).json({ error: 'this name already exists!' })
+      }
 
-  person.save().then(savedPerson => res.json(savedPerson))
+      const person = new Person({
+        name: body.name,
+        number: body.number
+      })
+      return person.save()
+    })
+    .then(savedPerson => {
+      if (savedPerson) {
+        res.json(savedPerson)
+      }
+    })
+    .catch(error => next(error))
+})
+
+app.put('/api/persons/:id', (req, res, next) => {
+  const { name, number } = req.body;
+
+  Person.findById(req.params.id)
+    .then(person => {
+      if(!person){
+        return res.status(404).end()
+      } 
+    })
+
+  Person.updateOne({ name: name }, { number: number })
+    .then(result => {
+      if (result.matchedCount > 0) {
+        res.status(200).send({ message: "Update successful" });
+      } else {
+        res.status(404).send({ error: "Name not found" });
+      }
+    })
+
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
