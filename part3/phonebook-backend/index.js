@@ -80,6 +80,10 @@ app.post('/api/persons', (req, res) => {
     return res.status(400).json({
       error: 'name is missing!'
     })
+  }else if(Person.findOne({ name: body.name})){
+    return res.status(400).json({
+      error: 'this name already exists!'
+    })
   }
 
   const person = new Person({
