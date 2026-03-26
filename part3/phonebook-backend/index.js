@@ -110,22 +110,19 @@ app.post('/api/persons', (req, res, next) => {
 app.put('/api/persons/:id', (req, res, next) => {
   const { name, number } = req.body;
 
-  Person.findById(req.params.id)
-    .then(person => {
-      if(!person){
-        return res.status(404).end()
-      } 
-    })
-
-  Person.updateOne({ name: name }, { number: number })
-    .then(result => {
-      if (result.matchedCount > 0) {
-        res.status(200).send({ message: "Update successful" });
+  Person.findByIdAndUpdate(
+    req.params.id, 
+    { name, number }, 
+    { new: true, runValidators: true, context: 'query' }
+  )
+    .then(updatedPerson => {
+      if (updatedPerson) {
+        res.json(updatedPerson)
       } else {
-        res.status(404).send({ error: "Name not found" });
+        res.status(404).end()
       }
     })
-
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
