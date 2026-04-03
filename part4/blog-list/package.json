@@ -1,0 +1,19 @@
+{
+  "name": "blog-list",
+  "version": "1.0.0",
+  "description": "project for part 4 Full Stack Open course",
+  "license": "MIT",
+  "author": "Anderson da Silva Marques",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.3",
+    "morgan": "^1.10.1"
+  }
+}
