@@ -57,3 +57,13 @@ Exercises
 
 [Data For Countries](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part2/data-for-countries)
 <img width="1920" height="1080" alt="data-for-countries" src="https://github.com/user-attachments/assets/5d1f95d8-76eb-419a-957a-da612fdb808f" />
+
+## Programming a server with Node.js and Express
+- Node.js and Express
+- Deploying app to internet
+- Saving data to MongoDB
+- Validation and ESLint
+
+[Phonebook Backend](https://github.com/AndersonMarques0/Full_Stack_Exercises/tree/main/part3/phonebook-backend)
+https://github.com/user-attachments/assets/0793b02f-ef73-4e32-a1cd-5fe507cf29cd
+
