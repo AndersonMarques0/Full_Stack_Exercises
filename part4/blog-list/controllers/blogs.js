@@ -17,33 +17,43 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res, next) => {
-  const blog = new Blog(req.body)
-
-  const savedBlog = await blog.save()
-  res.status(201).json(savedBlog)
+  try {
+    const blog = new Blog(req.body)
+    const savedBlog = await blog.save()
+    res.status(201).json(savedBlog)
+  } catch (error) {
+    next(error)
+  }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res, next) => {
   const { title, author, url, likes } = req.body
 
-  Blog.findByIdAndUpdate(
-    req.params.id,
-    { title, author, url, likes }
-  )
-    .then(updatedBlog => {
-      if (updatedBlog) {
-        res.json(updatedBlog)
-      } else {
-        res.status(400).end()
-      }
-    })
-    .catch(error => next(error))
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      { title, author, url, likes },
+      { new: true, runValidators: true, context: 'query' }
+    )
+
+    if (updatedBlog) {
+      res.json(updatedBlog)
+    } else {
+      res.status(400).end()
+    }
+  } catch (error) {
+    next(error)
+  }
 
 })
 
-router.delete("/:id", async (req, res) => {
-  await Blog.findByIdAndDelete(req.params.id)
-  res.status(204).end()
+router.delete("/:id", async (req, res, next) => {
+  try {
+    await Blog.findByIdAndDelete(req.params.id)
+    res.status(204).end()
+  } catch (error) {
+    next(error)
+  }
 })
 
 export default router
