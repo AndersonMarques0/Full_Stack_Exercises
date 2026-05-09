@@ -106,6 +106,27 @@ describe('when there is initially some notes saved', () => {
         })
     })
 
+    describe('updating a note', () => {
+        test('succeeds updating likes', async () => {
+            const blogsAtStart = await helper.blogsInDb()
+            const blogToUpdate = blogsAtStart[0]
+
+            const updatedLikes = (blogToUpdate.likes || 0) + 10
+
+            const result = await api
+                .put(`/api/blogs/${blogToUpdate.id}`)
+                .send({ likes: updatedLikes })
+                .expect(200)
+                .expect('Content-Type', /application\/json/)
+
+            assert.strictEqual(result.body.likes, updatedLikes)
+
+            const blogsAtEnd = await helper.blogsInDb()
+            const updated = blogsAtEnd.find(b => b.id === blogToUpdate.id)
+            assert.strictEqual(updated.likes, updatedLikes)
+        })
+    })
+
 })
 
 after(async () => {
