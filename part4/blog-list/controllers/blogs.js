@@ -1,30 +1,50 @@
 import express from 'express'
 const router = express.Router()
-import Blog from  '../models/blog.js'
+import Blog from '../models/blog.js'
 import User from '../models/user.js'
+import jwt from 'jsonwebtoken'
 
 router.get('/', async (req, res, next) => {
-  const blogs = await Blog.find({}).populate('blogs', { title: 1, author: 1, url: 1, likes: 1, user: 1})
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1})
   res.json(blogs)
 })
 
 router.get('/:id', async (req, res) => {
   const blog = await Blog.findById(req.params.id)
-  if(blog) {
+  if (blog) {
     res.json(blog)
   } else {
     res.status(404).end()
   }
 })
 
+const getTokenFrom = req => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.startsWith('Bearer')) {
+    return authorization.replace('Bearer', '')
+  }
+  return null
+}
+
 router.post('/', async (req, res, next) => {
   try {
-    const blog = new Blog(req.body)
-    const user = await User.findById(req.body.user)
-
-    if(!user) {
-      return res.status(400).json({ error: 'userId missing or not valid'})
+    const token = getTokenFrom(req)
+    if (!token) {
+      return res.status(401).json({ error: 'token missing' })
     }
+
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'token invalid' })
+    }
+
+    const user = await User.findById(decodedToken.id)
+    if (!user) {
+      return res.status(400).json({ error: 'user not found' })
+    }
+
+    const blog = new Blog(req.body)
+    blog.user = user._id
 
     const savedBlog = await blog.save()
     user.blogs = user.blogs.concat(savedBlog._id)
