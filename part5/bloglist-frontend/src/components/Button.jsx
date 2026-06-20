@@ -1,10 +1,10 @@
 export default function Button(props) {
 
-    const { buttonText, buttonType } = props
+    const { buttonText, buttonType, onClick } = props
 
     return (
         <div>
-            <button
+            <button onClick={onClick}
                 type={buttonType}
             >
                 {buttonText}

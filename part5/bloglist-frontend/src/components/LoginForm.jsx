@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from './Input.jsx'
 import Button from './Button.jsx'
 import loginService from '../services/login.js'
+import blogService from '../services/blogs.js'
 
 export default function LoginForm(props) {
 
@@ -9,12 +10,27 @@ export default function LoginForm(props) {
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(null)
 
+    useEffect(() => {
+	const loggedUserJSON = window.localStorage.getItem("loggedUser")
+	if (loggedUserJSON) {
+	    const user = JSON.parse(loggedUserJSON)
+	    props.setUser(user)
+	    blogService.setToken(user.token)
+	}
+    }, [])
+
+
     const handleLogin = async event => {
         event.preventDefault()
         console.log('Loggin in with', username, password)
 
         try {
             const user = await loginService.login({ username, password })
+
+	    window.localStorage.setItem(
+		'loggedUser', JSON.stringify(user)
+	    )
+	    blogService.setToken(user.token)
             props.setUser(user)
             setUsername('')
             setPassword('')
@@ -25,7 +41,7 @@ export default function LoginForm(props) {
             }, 5000)
         }
     }
-
+    
     return (
         <div>
             <p>{errorMessage}</p>

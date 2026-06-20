@@ -13,7 +13,7 @@ const App = () => {
     )
   }, [user])
 
-  if (user === null) {
+  if (!user) {
     return (
       <div>
         <LoginForm
@@ -24,14 +24,7 @@ const App = () => {
     )
   } else {
     return (
-      <div>
-
-
-        <h2>blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )}
-      </div>
+	<Blog blog={blogs} user={user} />	
     )
   }
 
