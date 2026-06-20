@@ -6,6 +6,10 @@ import LoginForm from './components/LoginForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
+  const [author, setAuthor] = useState("")
+  const [title, setTitle] = useState("")
+  const [url, setUrl] = useState("")
+  const [likes, setLikes] = useState(0)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -24,7 +28,13 @@ const App = () => {
     )
   } else {
     return (
-	<Blog blog={blogs} user={user} />	
+	<Blog blog={blogs} 
+	    user={user} setUser={setUser}
+	    title={title} setTitle={setTitle}
+	    author={author} setAuthor={setAuthor}
+	    url={url} setUrl={setUrl}
+	    likes={likes} setLikes={setLikes}
+	/>	
     )
   }
 
