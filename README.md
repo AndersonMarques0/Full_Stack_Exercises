@@ -18,8 +18,6 @@ Here's what I learned through my studies in Full Stack Open!
 - Full-stack web development
 - JavaScript fatigue
 
-Exercises
-
 [New_note_diagram](https://github.com/AndersonMarques0/Full_Stack_Exercises/blob/main/part0/new_note.md)
 <img width="1047" height="730" alt="new_note" src="https://github.com/user-attachments/assets/67fb2af0-7dc3-40ec-bfbb-fb65e768bc70" />
 
@@ -68,3 +66,10 @@ Exercises
 
 https://github.com/user-attachments/assets/0793b02f-ef73-4e32-a1cd-5fe507cf29cd
 
+## Testing Express servers, user administration
+- Structure of backend application, introduction to testing
+- Testing the backend
+- User administration
+- Token authentication
+
+<img width="950" height="1005" alt="image" src="https://github.com/user-attachments/assets/ea3356bc-0fd2-4d1c-98c9-e90f088535f4" />
