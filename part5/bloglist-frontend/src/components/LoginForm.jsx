@@ -3,12 +3,13 @@ import Input from './Input.jsx'
 import Button from './Button.jsx'
 import loginService from '../services/login.js'
 import blogService from '../services/blogs.js'
+import Notification from './Notification.jsx'
 
 export default function LoginForm(props) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessage, setErrorMessage] = useState(null)
+    const time = 5000
 
     useEffect(() => {
 	const loggedUserJSON = window.localStorage.getItem("loggedUser")
@@ -35,16 +36,18 @@ export default function LoginForm(props) {
             setUsername('')
             setPassword('')
         } catch {
-            setErrorMessage('wrong credentials')
-            setTimeout(() => {
-                setErrorMessage(null)
-            }, 5000)
+	    props.setMessage('wrong credentials')
+	    props.setCss('negative')
+	    setTimeout(() => props.setMessage('') ,time)    
         }
     }
     
     return (
         <div>
-            <p>{errorMessage}</p>
+            <Notification
+		message={props.message}
+		css={props.css}
+	    />
 
             <form onSubmit={handleLogin}>
                 <Input 

@@ -1,0 +1,11 @@
+.positive {
+    color: #439B3B;
+    border: 2px solid #439B3B;
+    padding: 5px;
+}
+
+.negative {
+    color: red;
+    border: 2px solid red;
+    padding: 5px;
+}

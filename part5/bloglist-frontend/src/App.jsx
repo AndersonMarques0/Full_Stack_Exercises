@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import LoginForm from './components/LoginForm'
+import './App.css'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -10,6 +11,8 @@ const App = () => {
   const [title, setTitle] = useState("")
   const [url, setUrl] = useState("")
   const [likes, setLikes] = useState(0)
+  const [message, setMessage] = useState(null)
+  const [css, setCss] = useState("")
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -21,8 +24,12 @@ const App = () => {
     return (
       <div>
         <LoginForm
-          user={user}
-          setUser={setUser}
+	    user={user}
+	    setUser={setUser}
+	    message={message}
+	    setMessage={setMessage}
+	    css={css}
+	    setCss={setCss}
         />
       </div>
     )
@@ -34,6 +41,10 @@ const App = () => {
 	    author={author} setAuthor={setAuthor}
 	    url={url} setUrl={setUrl}
 	    likes={likes} setLikes={setLikes}
+	    message={message}
+	    setMessage={setMessage}
+	    css={css}
+	    setCss={setCss}
 	/>	
     )
   }
