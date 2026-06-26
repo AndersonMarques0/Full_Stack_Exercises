@@ -2,6 +2,8 @@ import Button from './Button.jsx'
 import Input from './Input.jsx'
 import blogService from '../services/blogs.js'
 import Notification from './Notification.jsx'
+import Togglable from './Toggable.jsx'
+import NewBlog from './NewBlog.jsx'
 
 const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
 
@@ -55,45 +57,16 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 	buttonText="Log out" onClick={logout}
 	/>
 
-	<h2>create new</h2>
-
-	<Input    
-	textLabel="title: "
-	type="text"
-	placehd="type a title"
-	value={title}
-	onChange={(e) => setTitle(e.target.value)}
-	/>
-
-	<Input
-	textLabel="author: "
-	type="text"
-	placehd="type an author"
-	value={author}
-	onChange={(e) => setAuthor(e.target.value)}
-	/>
-
-	<Input 
-	textLabel="url: "
-	type="text"
-	placehd="type an url"
-	value={url}
-	onChange={(e) => setUrl(e.target.value)}
-	/>
-
-	<Input
-	textLabel="Likes: "
-	type="number"
-	placehd="type the book's likes' number"
-	value={likes}
-	onChange={(e) => setLikes(e.target.value)}
-
-	/>
-
-	<Button
-	buttonText="create"
-	onClick={() => createNewBook(title, author, url, likes)}
-	/>
+	<Togglable buttonLabel="create new blog" >
+	    <NewBlog
+		title={title} setTitle={setTitle}
+		author={author} setAuthor={setAuthor}
+		url={url} setUrl={setUrl}
+		likes={likes} setLikes={setLikes}
+		createNewBook={createNewBook}
+	    />
+	    
+	</Togglable>
 
 	{createList(blog)}
 	</div>
