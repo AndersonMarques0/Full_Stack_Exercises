@@ -1,5 +1,4 @@
 import Button from './Button.jsx'
-import Input from './Input.jsx'
 import blogService from '../services/blogs.js'
 import Notification from './Notification.jsx'
 import Togglable from './Toggable.jsx'
@@ -8,10 +7,27 @@ import NewBlog from './NewBlog.jsx'
 const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
 
     const createList = (list) => {
+	
+	if(!Array.isArray(list)) {
+	    return null
+	}
+
 	return list.map((item,index) => {
-	    return <p key={index} >
-		{item.title} {item.author}
-		</p>
+	    return (
+		    <div key={index} className='blog' >
+			{item.title} {item.author} 
+			<Togglable
+			    buttonLabel="view"
+			>
+			    {item.url}<br/>
+			    likes {item.likes} 
+				<Button
+				    buttonText="like"
+				/> <br/>
+			    {item.user.username} <br/>
+			</Togglable>
+		    </div>
+	    )
 	})
     }
 

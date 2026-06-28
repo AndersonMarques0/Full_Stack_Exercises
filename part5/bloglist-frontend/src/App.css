@@ -9,3 +9,9 @@
     border: 2px solid red;
     padding: 5px;
 }
+
+.blog {
+    padding: 5px 2px 2px 2px;
+    border: 1px solid lightblue;
+    margin: 0px 0px 2px 0px;
+}
