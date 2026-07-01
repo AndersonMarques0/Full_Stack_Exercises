@@ -4,19 +4,28 @@ import Notification from './Notification.jsx'
 import Togglable from './Toggable.jsx'
 import NewBlog from './NewBlog.jsx'
 
-const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
-        
-    console.log(blog)
+const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
 
     const likeBook = (index) => {
 	
-	let book = blog[index]
+	let book = blogs[index]
 
 	book = {
 	    likes: book.likes + 1 
 	}
-	return blogService.update(blog[index].id, book)	
+	return blogService.update(blogs[index].id, book)	
 
+    }
+
+    const deleteBook = (book) => {
+	
+	const permission = window.confirm(`Remove blog ${book.title} by ${book.author}`)	
+	if(!permission) {
+	    return
+	}
+
+	blogService.deleteById(book.id)
+	return setBlogs(blogs.filter(blog => blog.id !== book.id))
     }
 
     const createList = (list) => {
@@ -28,7 +37,6 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 	const sortedList = list.sort((a,b) => a.likes - b.likes)
 
 	return sortedList.map((item,index) => {
-	    console.log(index)
 	    return (
 		    <div key={index} className='blog' >
 			{item.title} {item.author} 
@@ -41,6 +49,10 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 				    buttonText="like"
 				/> <br/>
 			    {item.user.username} <br/>
+			    {item.user.username === user.username ? <Button
+				buttonText="delete"
+				onClick={() => deleteBook(item)}
+			    /> : null} <br/>
 			</Togglable>
 		    </div>
 	    )
@@ -102,7 +114,7 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 	    
 	</Togglable>
 
-	{createList(blog)}
+	{createList(blogs)}
 	</div>
 
     )

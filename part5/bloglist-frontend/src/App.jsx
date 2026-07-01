@@ -35,7 +35,8 @@ const App = () => {
 	)
     } else {
 	return (
-	    <Blog blog={blogs} 
+	    <Blog 
+		blogs={blogs} setBlogs={setBlogs} 
 		user={user} setUser={setUser}
 		title={title} setTitle={setTitle}
 		author={author} setAuthor={setAuthor}
