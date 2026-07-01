@@ -20,11 +20,14 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
     }
 
     const createList = (list) => {
+	
 	if(!Array.isArray(list)) {
 	    return null
 	}
 
-	return list.map((item,index) => {
+	const sortedList = list.sort((a,b) => a.likes - b.likes)
+
+	return sortedList.map((item,index) => {
 	    console.log(index)
 	    return (
 		    <div key={index} className='blog' >
@@ -42,6 +45,8 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 		    </div>
 	    )
 	})
+
+	
     }
 
     const logout = () => {
