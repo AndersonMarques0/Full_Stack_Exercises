@@ -15,7 +15,6 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 	book = {
 	    likes: book.likes + 1 
 	}
-
 	return blogService.update(blog[index].id, book)	
 
     }
