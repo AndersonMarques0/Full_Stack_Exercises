@@ -23,13 +23,13 @@ const App = () => {
     if (!user) {
 	return (
 	    <div>
-	    <LoginForm
-	    user={user}
-	    setUser={setUser}
-	    message={message}
-	    setMessage={setMessage}
-	    css={css}
-	    setCss={setCss}
+		<LoginForm
+		    user={user}
+		    setUser={setUser}
+		    message={message}
+		    setMessage={setMessage}
+		    css={css}
+		    setCss={setCss}
 	    />
 	    </div>
 	)
