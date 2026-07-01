@@ -5,14 +5,28 @@ import Togglable from './Toggable.jsx'
 import NewBlog from './NewBlog.jsx'
 
 const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
+        
+    console.log(blog)
+
+    const likeBook = (index) => {
+	
+	let book = blog[index]
+
+	book = {
+	    likes: book.likes + 1 
+	}
+
+	return blogService.update(blog[index].id, book)	
+
+    }
 
     const createList = (list) => {
-	
 	if(!Array.isArray(list)) {
 	    return null
 	}
 
 	return list.map((item,index) => {
+	    console.log(index)
 	    return (
 		    <div key={index} className='blog' >
 			{item.title} {item.author} 
@@ -21,7 +35,7 @@ const Blog = ({ blog, user, setUser, title, setTitle, author, setAuthor, url, se
 			>
 			    {item.url}<br/>
 			    likes {item.likes} 
-				<Button
+				<Button onClick={() => likeBook(index)}
 				    buttonText="like"
 				/> <br/>
 			    {item.user.username} <br/>
