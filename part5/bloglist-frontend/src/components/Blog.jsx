@@ -10,9 +10,7 @@ const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuth
 	
 	let book = blogs[index]
 
-	book = {
-	    likes: book.likes + 1 
-	}
+	book.likes = book.likes + 1
 	return blogService.update(blogs[index].id, book)	
 
     }
