@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import Blog from './Blog.jsx'
 import '../App.css'
 import { expect } from 'vitest'
+import NewBlog from './NewBlog.jsx'
 
 test('render blog\'s title and author, but not render url or number of likes by default', () => {
     
@@ -172,5 +173,40 @@ test('clicking the like button twice will call the event handler twice as well',
     await userMock.click(button)
     await userMock.click(button)
     expect(mockHandler.mock.calls).toHaveLength(2)
+
+})
+
+test('check the data send through the form to create a new blog', async () => {
+    
+    const createBlog = vi.fn()
+    const userMock = userEvent.setup()
+
+    render(
+	<NewBlog 
+	   createNewBook={createBlog} 
+	/>
+    )
+
+    const titleInput = screen.getByRole("textbox", { name: /title/i})
+    const authorInput = screen.getByRole('textbox', { name: /author/i})
+    const urlInput = screen.getByRole('textbox', { name: /url/i})
+    const likeInput = screen.getByRole('spinbutton', { name: /likes/i})
+    const button = screen.getByRole('button')
+
+    await userMock.type(titleInput, 'book\'s title')
+    await userMock.type(authorInput, 'book\'s author')
+    await userMock.type(urlInput, 'url\'s website to buy the book')
+    await userMock.type(likeInput, "100")
+    await userMock.click(button)
+
+    expect(createBlog.mock.calls).toHaveLength(1)
+    expect(createBlog.mock.calls[0][0]).toBe('book\'s title')
+    expect(createBlog.mock.calls[0][1]).toBe('book\'s author')
+    expect(createBlog.mock.calls[0][2]).toBe('url\'s website to buy the book')
+    expect(createBlog.mock.calls[0][3]).toBe('100')
+    
+    console.log(createBlog.mock.calls)
+
+
 
 })

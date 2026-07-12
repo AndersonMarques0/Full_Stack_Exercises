@@ -1,7 +1,13 @@
+import { useState } from 'react'
 import Button from "./Button.jsx"
 import Input from "./Input.jsx"
 
-const NewBlog = ({ title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, createNewBook }) => {
+const NewBlog = ({ createNewBook }) => {
+
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
+    const [likes, setLikes] = useState(0)
 
     return (
 	<div>

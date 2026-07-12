@@ -4,8 +4,8 @@ import Notification from './Notification.jsx'
 import Togglable from './Toggable.jsx'
 import NewBlog from './NewBlog.jsx'
 
-const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss, likeBook }) => {
-
+const Blog = ({ blogs, setBlogs, user, setUser, message, setMessage, css, setCss, likeBook }) => {
+    
     const deleteBook = (book) => {
 	
 	const permission = window.confirm(`Remove blog ${book.title} by ${book.author}`)	
@@ -94,16 +94,11 @@ const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuth
 
 	<Togglable buttonLabel="create new blog" >
 	    <NewBlog
-		title={title} setTitle={setTitle}
-		author={author} setAuthor={setAuthor}
-		url={url} setUrl={setUrl}
-		likes={likes} setLikes={setLikes}
 		createNewBook={createNewBook}
 	    />
 	    
 	</Togglable>
-
-	{createList(blogs)}
+	    {createList(blogs)}
 	</div>
 
     )

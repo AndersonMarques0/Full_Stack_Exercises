@@ -7,10 +7,6 @@ import './App.css'
 const App = () => {
     const [blogs, setBlogs] = useState([])
     const [user, setUser] = useState(null)
-    const [author, setAuthor] = useState("")
-    const [title, setTitle] = useState("")
-    const [url, setUrl] = useState("")
-    const [likes, setLikes] = useState(0)
     const [message, setMessage] = useState(null)
     const [css, setCss] = useState("")
 
@@ -33,12 +29,9 @@ const App = () => {
 	return (
 	    <div>
 		<LoginForm
-		    user={user}
-		    setUser={setUser}
-		    message={message}
-		    setMessage={setMessage}
-		    css={css}
-		    setCss={setCss}
+		    user={user} setUser={setUser}
+		    message={message} setMessage={setMessage}
+		    css={css} setCss={setCss}
 	    />
 	    </div>
 	)
@@ -47,10 +40,6 @@ const App = () => {
 	    <Blog 
 		blogs={blogs} setBlogs={setBlogs} 
 		user={user} setUser={setUser}
-		title={title} setTitle={setTitle}
-		author={author} setAuthor={setAuthor}
-		url={url} setUrl={setUrl}
-		likes={likes} setLikes={setLikes}
 		message={message} setMessage={setMessage}
 		css={css} setCss={setCss}
 		likeBook={likeBook}
