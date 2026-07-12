@@ -20,6 +20,15 @@ const App = () => {
 	)
     }, [user])
 
+    const likeBook = (index) => {
+	
+	let book = blogs[index]
+
+	book.likes = book.likes + 1
+	return blogService.update(blogs[index].id, book)	
+
+    }
+
     if (!user) {
 	return (
 	    <div>
@@ -42,10 +51,9 @@ const App = () => {
 		author={author} setAuthor={setAuthor}
 		url={url} setUrl={setUrl}
 		likes={likes} setLikes={setLikes}
-		message={message}
-		setMessage={setMessage}
-		css={css}
-		setCss={setCss}
+		message={message} setMessage={setMessage}
+		css={css} setCss={setCss}
+		likeBook={likeBook}
 	    />	
 	)
     }

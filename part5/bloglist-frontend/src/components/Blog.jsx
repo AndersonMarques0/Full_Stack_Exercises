@@ -4,16 +4,7 @@ import Notification from './Notification.jsx'
 import Togglable from './Toggable.jsx'
 import NewBlog from './NewBlog.jsx'
 
-const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss }) => {
-
-    const likeBook = (index) => {
-	
-	let book = blogs[index]
-
-	book.likes = book.likes + 1
-	return blogService.update(blogs[index].id, book)	
-
-    }
+const Blog = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuthor, url, setUrl, likes, setLikes, message, setMessage, css, setCss, likeBook }) => {
 
     const deleteBook = (book) => {
 	
